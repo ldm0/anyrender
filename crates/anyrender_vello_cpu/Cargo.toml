@@ -23,6 +23,9 @@ log_frame_times = [
 # but not recommended for use in production
 experimental_image_cache = []
 filters = []
+# Enables Glifo's PNG decoder for CBDT/sbix bitmap glyphs. COLR glyphs do not
+# need this feature, but Linux color emoji fonts commonly use CBDT PNG strikes.
+bitmap-glyphs = ["vello_cpu/png"]
 
 [dependencies]
 anyrender = { workspace = true }
