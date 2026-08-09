@@ -1,7 +1,7 @@
 use crate::VelloCpuScenePainter;
 use anyrender::{ImageRenderer, RenderContext as AnyRenderContext};
 use debug_timer::debug_timer;
-use vello_cpu::{RenderContext, RenderMode, Resources};
+use vello_cpu::{PixmapMut, RenderContext, Resources};
 
 pub struct VelloCpuImageRenderer {
     scene: VelloCpuScenePainter,
@@ -37,13 +37,15 @@ impl ImageRenderer for VelloCpuImageRenderer {
         self.scene.render_ctx.flush();
         timer.record_time("flush");
 
-        self.scene.render_ctx.render_to_buffer(
-            &mut self.scene.resources,
-            buffer,
+        let pixmap = PixmapMut::new(
             self.scene.render_ctx.width(),
             self.scene.render_ctx.height(),
-            RenderMode::OptimizeSpeed,
-        );
+            buffer,
+        )
+        .expect("ImageRenderer provides a correctly sized RGBA8 target");
+        self.scene
+            .render_ctx
+            .render(pixmap, &mut self.scene.resources);
         timer.record_time("render");
 
         timer.print_times("vello_cpu: ");

@@ -1,7 +1,7 @@
 use std::sync::Arc;
 
 use anyrender::{Filter, NormalizedCoord, Paint, PaintRef, PaintScene, RenderContext};
-use glifo::FontEmbolden;
+use glifo_vello_cpu::FontEmbolden;
 use kurbo::{Affine, Diagonal2, Rect, Shape, Stroke};
 use peniko::{BlendMode, Color, Fill, FontData, ImageBrush, StyleRef};
 use vello_cpu::{ImageSource, PaintType, Pixmap};
@@ -47,8 +47,8 @@ pub struct VelloCpuScenePainter {
 impl VelloCpuScenePainter {
     pub fn finish(mut self) -> Pixmap {
         let mut pixmap = Pixmap::new(self.render_ctx.width(), self.render_ctx.height());
-        self.render_ctx
-            .render_to_pixmap(&mut self.resources, &mut pixmap);
+        self.render_ctx.flush();
+        self.render_ctx.render(&mut pixmap, &mut self.resources);
         pixmap
     }
 }
@@ -197,6 +197,6 @@ impl PaintScene for VelloCpuScenePainter {
         self.render_ctx.set_transform(transform);
         self.render_ctx.set_paint(PaintType::Solid(color));
         self.render_ctx
-            .fill_blurred_rounded_rect(&rect, radius as f32, std_dev as f32);
+            .fill_blurred_rounded_rect(&rect, radius as f32, std_dev as f32, false);
     }
 }

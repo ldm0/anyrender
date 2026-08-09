@@ -4,9 +4,11 @@ use anyrender::{
     Filter,
     filters::{EdgeMode, FilterEffect},
 };
-use vello_common::filter_effects::FilterPrimitive;
+use vello_common_vello_cpu::filter_effects::FilterPrimitive;
 
-pub(crate) fn convert_filter(filter: Arc<Filter>) -> Option<vello_common::filter_effects::Filter> {
+pub(crate) fn convert_filter(
+    filter: Arc<Filter>,
+) -> Option<vello_common_vello_cpu::filter_effects::Filter> {
     let nodes = filter.nodes();
     if nodes.is_empty() {
         return None;
@@ -15,9 +17,7 @@ pub(crate) fn convert_filter(filter: Arc<Filter>) -> Option<vello_common::filter
     // Vello CPU only supports single-node filters at the moment
     let node = &filter.nodes()[0];
     let primitive = convert_filter_effect(&node.effect)?;
-    Some(vello_common::filter_effects::Filter::from_primitive(
-        primitive,
-    ))
+    Some(vello_common_vello_cpu::filter_effects::Filter::from_primitive(primitive))
 }
 
 pub(crate) fn convert_filter_effect(effect: &FilterEffect) -> Option<FilterPrimitive> {
@@ -53,11 +53,11 @@ pub(crate) fn convert_filter_effect(effect: &FilterEffect) -> Option<FilterPrimi
     })
 }
 
-fn convert_edge_mode(edge_mode: EdgeMode) -> vello_common::filter_effects::EdgeMode {
+fn convert_edge_mode(edge_mode: EdgeMode) -> vello_common_vello_cpu::filter_effects::EdgeMode {
     match edge_mode {
-        EdgeMode::Duplicate => vello_common::filter_effects::EdgeMode::Duplicate,
-        EdgeMode::Wrap => vello_common::filter_effects::EdgeMode::Wrap,
-        EdgeMode::Mirror => vello_common::filter_effects::EdgeMode::Mirror,
-        EdgeMode::None => vello_common::filter_effects::EdgeMode::None,
+        EdgeMode::Duplicate => vello_common_vello_cpu::filter_effects::EdgeMode::Duplicate,
+        EdgeMode::Wrap => vello_common_vello_cpu::filter_effects::EdgeMode::Wrap,
+        EdgeMode::Mirror => vello_common_vello_cpu::filter_effects::EdgeMode::Mirror,
+        EdgeMode::None => vello_common_vello_cpu::filter_effects::EdgeMode::None,
     }
 }
