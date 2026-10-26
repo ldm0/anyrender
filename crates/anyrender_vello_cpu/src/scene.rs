@@ -177,6 +177,7 @@ impl PaintScene for VelloCpuScenePainter {
                     .font_size(font_size)
                     .hint(hint)
                     .normalized_coords(normalized_coords)
+                    .font_embolden(FontEmbolden::new(Diagonal2::new(embolden.x, embolden.y)))
                     .glyph_transform(glyph_transform.unwrap_or_default())
                     .stroke_glyphs(glyphs.map(|g| vello_cpu::Glyph {
                         id: g.id,

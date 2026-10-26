@@ -227,7 +227,10 @@ pub trait PaintScene: RenderContext {
         shape: &impl Shape,
     );
 
-    /// Draws a run of glyphs
+    /// Draws a run of glyphs.
+    ///
+    /// `embolden` expands the outline in local run pixels, before `transform`
+    /// and `glyph_transform`. The same expansion applies to fill and stroke.
     #[allow(clippy::too_many_arguments)]
     fn draw_glyphs<'a, 's: 'a>(
         &'s mut self,
