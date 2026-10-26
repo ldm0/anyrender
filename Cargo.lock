@@ -1263,8 +1263,7 @@ dependencies = [
 [[package]]
 name = "glifo"
 version = "0.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "282a26c1e23de04bdab3e34a21b6f877a479b96737792516b9b8b8f69b6661be"
+source = "git+https://github.com/ldm0/vello?rev=1f3376b102ca9a0950221f3df09316c4ef1299ba#1f3376b102ca9a0950221f3df09316c4ef1299ba"
 dependencies = [
  "bytemuck",
  "foldhash 0.2.0",
@@ -3672,8 +3671,7 @@ dependencies = [
 [[package]]
 name = "vello_common"
 version = "0.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bbb2141a2bca6e6d598e471fd4d1d7eed8e020aad6a28187edda07f091a325dd"
+source = "git+https://github.com/ldm0/vello?rev=1f3376b102ca9a0950221f3df09316c4ef1299ba#1f3376b102ca9a0950221f3df09316c4ef1299ba"
 dependencies = [
  "bytemuck",
  "fearless_simd",

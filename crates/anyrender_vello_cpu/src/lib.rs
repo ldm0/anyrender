@@ -1,6 +1,7 @@
 //! A [`vello_cpu`] backend for the [`anyrender`] 2D drawing abstraction
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
+mod glyph;
 mod image_renderer;
 mod scene;
 mod window_renderer;
@@ -8,6 +9,7 @@ mod window_renderer;
 #[cfg(feature = "filters")]
 mod filters;
 
+pub use glyph::{GlyphInkBounds, GlyphMeasurer, GlyphRepresentation};
 pub use image_renderer::VelloCpuImageRenderer;
 pub use scene::VelloCpuScenePainter;
 

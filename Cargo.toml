@@ -86,3 +86,9 @@ wasm-bindgen-futures = "0.4"
 
 # Dev-dependencies
 winit = { version = "0.30.2", features = ["rwh_06"] }
+
+[patch.crates-io]
+# Prepared glyph measurement shares Glifo with the CPU renderer. Embedders
+# using this fork must apply the same patches in their workspace root.
+glifo = { git = "https://github.com/ldm0/vello", rev = "1f3376b102ca9a0950221f3df09316c4ef1299ba" }
+vello_common = { git = "https://github.com/ldm0/vello", rev = "1f3376b102ca9a0950221f3df09316c4ef1299ba" }
